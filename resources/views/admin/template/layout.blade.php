@@ -1,0 +1,5 @@
+@include('admin.template.header')
+@include('admin.template.top')
+@include('admin.template.sidebar')
+@include('admin.template.container')
+@include('admin.template.footer')

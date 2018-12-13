@@ -1,0 +1,23 @@
+body.rtl{
+	direction: rtl;
+}
+
+/* Right Align */
+#header .logo {
+	float: right;
+}
+
+/* Left Align */
+{
+	float: left;
+}
+
+/* Text Align Right */
+{
+	text-align: right;
+}
+
+/* Text Align Left */
+{
+	text-align: left;
+}
