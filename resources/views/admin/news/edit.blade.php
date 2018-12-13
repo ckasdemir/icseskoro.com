@@ -26,7 +26,7 @@
                             <label class="control-label">İçerik :</label>
                             <div class="controls">
                                 <textarea class="textarea_editor span11" name="content"
-                                          rows="6">{!! $news->content !!}</textarea>
+                                          rows="20">{!! $news->content !!}</textarea>
                             </div>
                         </div>
                         <div class="control-group">

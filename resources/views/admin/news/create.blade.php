@@ -25,7 +25,7 @@
                         <div class="control-group">
                             <label class="control-label">İçerik :</label>
                             <div class="controls">
-                                <textarea class="textarea_editor span11" name="content" rows="6"
+                                <textarea class="textarea_editor span11" name="content" rows="20"
                                           placeholder="Haber içeriği ..."></textarea>
                             </div>
                         </div>
