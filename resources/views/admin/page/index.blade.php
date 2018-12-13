@@ -48,7 +48,7 @@
                                         @endif
                                     </td>
                                     <td>{{$item->title}}</td>
-                                    <td>{{str_limit(strip_tags($item->content), 80)}}...</td>
+                                    <td>{!! str_limit(strip_tags($item->content), 80) !!}...</td>
                                     <td style="text-align: center">{{$item->user->username}}</td>
                                     <td style="text-align: center">{!! date('d.m.Y H:i:s', strtotime($item->created_at)) !!}</td>
                                     <td style="text-align: center">
