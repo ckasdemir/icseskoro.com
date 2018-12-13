@@ -75,8 +75,8 @@
                         <div class="control-group">
                             <label class="control-label">Açıklama :</label>
                             <div class="controls">
-                                <textarea class="span11" placeholder="Etkinlik açıklaması" name="description"
-                                          rows="6"></textarea>
+                                <textarea class="textarea_editor span11" placeholder="Etkinlik açıklaması" name="description"
+                                          rows="20"></textarea>
                             </div>
                         </div>
                         <div class="control-group">

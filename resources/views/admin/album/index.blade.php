@@ -50,7 +50,7 @@
                                         @endif
                                     </td>
                                     <td>{{$item->album_name}}</td>
-                                    <td style="text-align: center">5</td>
+                                    <td style="text-align: center">{{$item->song->count()}}</td>
                                     <td style="text-align: center">{{$item->user->username}}</td>
                                     <td style="text-align: center">{!! date('d.m.Y H:i:s', strtotime($item->created_at)) !!}</td>
                                     <td style="text-align: center">

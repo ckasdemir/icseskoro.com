@@ -25,7 +25,7 @@
                         <div class="control-group">
                             <label class="control-label">Açıklama :</label>
                             <div class="controls">
-                                <textarea class="span11" name="description" rows="6"
+                                <textarea class="textarea_editor span11" name="description" rows="20"
                                           placeholder="Albüm açıklaması ..."></textarea>
                             </div>
                         </div>
@@ -87,4 +87,7 @@
     <script src="/admin/js/wysihtml5-0.3.0.js"></script>
     <script src="/admin/js/jquery.peity.min.js"></script>
     <script src="/admin/js/bootstrap-wysihtml5.js"></script>
+    <script>
+        $('.textarea_editor').wysihtml5();
+    </script>
 @endsection

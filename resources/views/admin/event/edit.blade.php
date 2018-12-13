@@ -76,8 +76,8 @@
                         <div class="control-group">
                             <label class="control-label">Açıklama :</label>
                             <div class="controls">
-                                <textarea class="span11" name="description"
-                                          rows="6">{!! $events->description !!}</textarea>
+                                <textarea class="textarea_editor span11" name="description"
+                                          rows="20">{!! $events->description !!}</textarea>
                             </div>
                         </div>
                         <div class="control-group">
