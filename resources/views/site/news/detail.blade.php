@@ -69,7 +69,7 @@
                                             </div>
                                         </div>
                                         <div class="text">
-                                            {!! $news->content !!}
+                                            {!! str_replace(array('<b>','</b>'), array('<strong>','</strong>'), $news->content) !!}
                                         </div>
                                     </div>
                                 </article>

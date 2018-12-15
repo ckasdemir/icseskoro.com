@@ -99,8 +99,9 @@
 
                                 <!-- Tab panes -->
                                 <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane active" id="home">
-                                        {!! $event->description !!}
+                                    <div role="tabpanel" class="tab-pane active"
+                                         id="home">
+                                        <p>{!! str_replace(array('<b>','</b>'), array('<strong>','</strong>'), $event->description) !!}</p>
                                     </div>
                                 </div>
                             </div>

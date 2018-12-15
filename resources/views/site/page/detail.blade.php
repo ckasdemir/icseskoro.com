@@ -44,7 +44,7 @@
                                     </div>
                                     <div class="description">
                                         <div class="text">
-                                            <p>{!! $page->content !!}</p>
+                                            {!! str_replace(array('<b>','</b>'), array('<strong>','</strong>'), $page->content) !!}
                                         </div>
                                     </div>
                                 </article>
@@ -61,13 +61,15 @@
                                     <article class="col-md-4">
                                         <figure>
                                             @if(!empty($item->image) && file_exists(public_path("/uploads/users/".$item->image)))
-                                                <a href="#" title="{{$item->name}}"><img src="/uploads/users/{{$item->image}}"
-                                                                 alt="{{$item->name}}"
-                                                                 style="width: 250px; height: 250px"></a>
+                                                <a href="#" title="{{$item->name}}"><img
+                                                        src="/uploads/users/{{$item->image}}"
+                                                        alt="{{$item->name}}"
+                                                        style="width: 250px; height: 250px"></a>
                                             @else
-                                                <a href="#" title="{{$item->name}}"><img src="/site/assets/images/default/default_user.jpg"
-                                                                 alt="{{$item->name}}"
-                                                                 style="width: 250px; height: 250px"></a>
+                                                <a href="#" title="{{$item->name}}"><img
+                                                        src="/site/assets/images/default/default_user.jpg"
+                                                        alt="{{$item->name}}"
+                                                        style="width: 250px; height: 250px"></a>
                                             @endif
                                         </figure>
                                         <div class="text">

@@ -11,7 +11,8 @@
                                 <div class="main-heading">
                                     <h2>{{$pages[0]->title}}</h2>
                                 </div>
-                                <p>{!! str_limit($pages[0]->content, 1200) !!}</p>
+                                <p>{!! str_limit(str_replace(array('<b>','</b>'), array('<strong>','</strong>'), $pages[0]->content), 1200) !!}</p>
+                                <a href="#" class="px-botton">BAŞVURU FORMU</a>
                             </div>
                         </article>
                         <article class="col-md-6">

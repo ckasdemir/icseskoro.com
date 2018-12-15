@@ -5631,7 +5631,7 @@ width:
 
 .event-detail .px-tabs.simple .tab-content strong {
     margin: 0 0 14px;
-    padding-right: 31px;
+    /*padding-right: 31px;*/
 }
 
 .event-detail .px-tabs.simple .tab-content ul {
@@ -6979,7 +6979,7 @@ width:
 
 .px-tabs.simple .tab-content strong {
     color: #181818;
-    display: block;
+    /*display: block;*/
     font-size: 16px;
     font-weight: 400;
     line-height: 22px;

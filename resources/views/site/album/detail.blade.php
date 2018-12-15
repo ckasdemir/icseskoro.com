@@ -51,7 +51,7 @@
                                                 {{$album->user->username}}
                                             </li>
                                         </ul>
-                                        {!! str_limit($album->description, 150) !!}
+                                        {!! str_limit(str_replace(array('<b>','</b>'), array('<strong>','</strong>'), $album->description), 150) !!}
                                     </div>
                                 </article>
                             </div>
@@ -104,7 +104,7 @@
                             </div>
                             <div class="rich-editor-text">
                                 <div class="col-md-12">
-                                    {!! $album->description !!}
+                                    <p>{!! str_replace(array('<b>','</b>'), array('<strong>','</strong>'), $album->description) !!}</p>
                                 </div>
                             </div>
                             <div class="px-team grid">

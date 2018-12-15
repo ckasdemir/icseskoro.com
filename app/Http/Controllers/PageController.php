@@ -134,9 +134,17 @@ class PageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $show_to_pages = Page::where('is_show_to_homepage', '=', true)->get()->count();
+        $show_to_homepage = Page::where('is_show_to_homepage', '=', true)->get();
+        $count = Page::where('is_show_to_homepage', '=', true)->get()->count();
 
-        if (($show_to_pages == 0 && request('is_show_to_homepage') == true) || ($show_to_pages > 0 && request('is_show_to_homepage') == false) || ($show_to_pages == 0 && request('is_show_to_homepage') == false)) {
+        if ($count > 0 && request('is_show_to_homepage') == true && $show_to_homepage[0]->id != $id) {
+            alert()
+                ->error('Hata!', 'İçerik anasayfada gösterilemez.')
+                ->showConfirmButton()
+                ->showCloseButton();
+
+            return back();
+        } else {
             $this->validate(request(), array(
                 'title' => 'required',
                 'content' => 'required'
@@ -181,13 +189,6 @@ class PageController extends Controller
 
                 return back();
             }
-        } else {
-            alert()
-                ->error('Hata!', 'İçerik anasayfada gösterilemez.')
-                ->showConfirmButton()
-                ->showCloseButton();
-
-            return back();
         }
     }
 
