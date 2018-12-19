@@ -1,4 +1,4 @@
-@extends('site.template.layout')
+@extends('site/template/layout')
 
 @section('content')
     @if(isset($pages) && sizeof($pages) > 0)
