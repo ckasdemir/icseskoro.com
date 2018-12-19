@@ -17,6 +17,7 @@ use App\User;
 use App\Video;
 use App\VideoGallery;
 use App\VoiceType;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -30,8 +31,7 @@ class HomeController extends Controller
     public function __construct()
     {
         //$this->middleware('admin');
-        //setlocale(LC_TIME, "Turkish");
-        //setlocale(LC_ALL, 'Turkish');
+        setlocale(LC_TIME, 'tr_TR');
     }
 
     /**
@@ -315,5 +315,94 @@ class HomeController extends Controller
     {
         auth()->logout();
         return redirect('/');
+    }
+
+    public function song()
+    {
+        $setting = Setting::get()->first();
+
+        $nav_pages = Page::where('status', '=', true)->get()->sortBy('order_no');
+
+        $advertisements = Advertisement::inRandomOrder()->where('status', '=', true)->take(2)->get();
+
+        $albums = Album::where('status', '=', true)->get()->sortBy('album_name');
+
+        $songs = Song::where('user_id', '=', Auth::user()->id)->get()->sortByDesc('created_at');
+
+        return view('site.song.index', compact('albums', 'songs', 'advertisements', 'setting', 'nav_pages'));
+    }
+
+    public function upload(Request $request)
+    {
+        if (Album::where('status', '=', true)->count() > 0) {
+            $this->validate(request(), array(
+                'song_name' => 'required',
+                'album_id' => 'required'
+            ));
+
+            $albumFolder = Album::find(request('album_id'))->folder_name;
+
+            $song = new Song();
+            $song->album_id = request('album_id');
+            $song->song_name = request('song_name');
+            $song->slug = str_slug(request('song_name'));
+            $song->status = false;
+            $song->user_id = Auth::user()->id;
+
+            if (!empty(request('document'))) {
+                if (request()->hasFile('document')) {
+                    $this->validate(request(), array('document' => 'mimes:doc,docx,pdf,png,jpg,jpeg,gif|max:2048'));
+                }
+
+                $file = request()->file('document');
+                $fileName = time() . '-' . str_slug(request('song_name')) . '.' . $file->extension();
+
+                if ($file->isValid()) {
+                    $folder = 'uploads/albums/' . $albumFolder . '/songs/';
+                    $file->move($folder, $fileName);
+                    $song->document = $fileName;
+                }
+            }
+
+            if (!empty(request('recording'))) {
+                if (request()->hasFile('recording')) {
+                    $this->validate(request(), array('recording' => 'mimes:wav,mpga|max:99999'));
+                }
+
+                $songFile = request()->file('recording');
+                $songFileName = time() . '-' . str_slug(request('song_name')) . '.mp3';
+
+                if ($songFile->isValid()) {
+                    $folder = 'uploads/albums/' . $albumFolder . '/songs/';
+                    $songFile->move($folder, $songFileName);
+                    $song->recording = $songFileName;
+                }
+            }
+
+            $song->save();
+
+            if ($song) {
+                alert()
+                    ->success('İşlem tamamlandı!', 'Şarkı ekleme işlemi başarıyla tamamlanmıştır.')
+                    ->showConfirmButton()
+                    ->showCloseButton();
+
+                return redirect()->route('site.songs');
+            } else {
+                alert()
+                    ->error('Hata!', 'Şarkı ekleme işlemi başarısız.')
+                    ->showConfirmButton()
+                    ->showCloseButton();
+
+                return back();
+            }
+        } else {
+            alert()
+                ->error('Hata!', 'Şarkı ekleme işlemi başarısız. Albüm bulunamadı.')
+                ->showConfirmButton()
+                ->showCloseButton();
+
+            return back();
+        }
     }
 }

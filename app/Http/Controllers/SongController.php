@@ -155,7 +155,6 @@ class SongController extends Controller
         $song->song_name = request('song_name');
         $song->slug = str_slug(request('song_name'));
         $song->status = request('status');
-        $song->user_id = Auth::user()->id;
 
         if (!empty(request('document'))) {
             if (request()->hasFile('document')) {

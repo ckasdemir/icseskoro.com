@@ -12,9 +12,6 @@
                                     <h2>{{$pages[0]->title}}</h2>
                                 </div>
                                 {!! str_limit(str_replace(array('<b>','</b>'), array('<strong>','</strong>'), $pages[0]->content), 1200) !!}
-                                <p>
-                                    <a href="#" class="px-botton">BAŞVURU FORMU</a>
-                                </p>
                             </div>
                         </article>
                         <article class="col-md-6">

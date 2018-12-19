@@ -234,6 +234,7 @@ table tfoot tr td {
 
 select,
 textarea,
+input[type=file],
 input[type=date],
 input[type=datetime],
 input[type=datetime-local],
@@ -4714,6 +4715,16 @@ width:
     padding: 5px 20px 0;
 }
 
+.px-result.suggestion select {
+    background-color: #f7f7f7;
+    color: #9f9f9f;
+    font-size: 18px;
+    font-weight: 300;
+    height: 54px;
+    line-height: 28px;
+    padding: 5px 20px 0;
+}
+
 .px-result.suggestion .btn.btn-default {
     border-radius: 0;
     border: 0;
@@ -4799,7 +4810,8 @@ width:
 }
 
 .px-result.relevent.other {
-    padding: 53px 0;
+    /*padding: 53px 0;*/
+    padding: 0;
 }
 
 .px-result.relevent.other .post-option h5 {
@@ -7346,6 +7358,7 @@ width:
 }
 
 .px-form.plain select,
+.px-form.plain input[type="file"],
 .px-form.plain input[type="tel"],
 .px-form.plain input[type="text"],
 .px-form.plain input[type="password"],
@@ -7822,4 +7835,28 @@ width:
   height: 340px;
   width: 340px; 
   cursor: pointer; 
+}
+
+input#file-document {
+  display: inline-block;
+  width: 100%;
+  padding: 120px 0 0 0;
+  overflow: hidden;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background: url('https://cdn1.iconfinder.com/data/icons/hawcons/32/698394-icon-130-cloud-upload-512.png') center center no-repeat #fff;
+  background-size: 60px 60px;
+}
+
+input#file-recording {
+  display: inline-block;
+  width: 100%;
+  padding: 120px 0 0 0;
+  overflow: hidden;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background: url('https://cdn1.iconfinder.com/data/icons/hawcons/32/698394-icon-130-cloud-upload-512.png') center center no-repeat #fff;
+  background-size: 60px 60px;
 }

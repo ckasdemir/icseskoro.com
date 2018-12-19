@@ -66,3 +66,5 @@ Route::get('/news/detail/{id}', 'HomeController@newsDetail')->name('site.newsDet
 Route::get('/page/{id}/{slug}', 'HomeController@page')->name('site.page');
 Route::get('profile', 'HomeController@profile')->name('site.profile')->middleware('verified');
 Route::post('profile/{id}', 'HomeController@profileUpdate')->name('site.profileUpdate')->middleware('verified');
+Route::get('/songs', 'HomeController@song')->name('site.songs')->middleware('verified');
+Route::post('/upload', 'HomeController@upload')->name('site.upload')->middleware('verified');

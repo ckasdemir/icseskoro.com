@@ -50,7 +50,7 @@
                                                 <div class="text">
                                                     <div class="post-option">
                                                         <div
-                                                            class=px-time>{{date('d-m-Y', strtotime($item->created_at))}}</div>
+                                                            class=px-time>{{date('d.m.Y', strtotime($item->created_at))}}</div>
                                                         <h5>
                                                             <a href="{{route('site.newsDetail', $item->id)}}">{{$item->title}}</a>
                                                         </h5>

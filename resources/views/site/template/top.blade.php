@@ -42,7 +42,7 @@
                                         <li><a href="{{route('admin.index')}}" target="_blank">YÖNETİM PANELİ</a></li>
                                     @endif
                                     <li><a href="{{route('site.albums')}}">ALBÜMLER</a></li>
-                                    <li><a href="#">ŞARKI YÜKLE</a></li>
+                                    <li><a href="{{route('site.songs')}}">YÜKLEMELERİM</a></li>
                                     <li><a href="{{route('site.profile')}}">PROFİLİM</a></li>
                                     <li><a href="{{route('site.logout')}}">ÇIKIŞ</a></li>
                                 </ul>

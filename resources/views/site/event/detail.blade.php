@@ -157,7 +157,7 @@
                 <!--end page content-->
                 <!--sidebar-->
                 <aside class="page-sidebar col-md-3">
-                    @if(isset($albums) && sizeof($albums) > 0)
+                    @if(Auth::check() && isset($albums) && sizeof($albums) > 0)
                         <div class="widget widget_albums">
                             <div class="widget-section-title"><h2>Albümler</h2></div>
                             <ul>
