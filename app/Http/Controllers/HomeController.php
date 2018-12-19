@@ -30,8 +30,8 @@ class HomeController extends Controller
     public function __construct()
     {
         //$this->middleware('admin');
-        setlocale(LC_TIME, "Turkish");
-        setlocale(LC_ALL, 'Turkish');
+        //setlocale(LC_TIME, "Turkish");
+        //setlocale(LC_ALL, 'Turkish');
     }
 
     /**
@@ -45,7 +45,7 @@ class HomeController extends Controller
 
         $nav_pages = Page::where('status', '=', true)->get()->sortBy('order_no');
 
-        $pages = Page::where('status', '=', true)->where('is_show_to_homepage', '=', true)->limit(1)->get();
+        $pages = Page::where('status', '=', true)->where('is_show_to_homepage', '=', true)->get();
 
         $sliders = Slider::where('status', '=', true)->get()->sortBy('order_no');
 
@@ -116,11 +116,10 @@ class HomeController extends Controller
         $nav_pages = Page::where('status', '=', true)->get()->sortBy('order_no');
 
         $photo_gallery = PhotoGallery::find($id);
-        $photo_gallery_name = $photo_gallery->title;
 
         $photos = Photo::where('status', '=', true)->where('photo_gallery_id', '=', $id)->get()->sortByDesc('created_at');
 
-        return view('site.photo_gallery.detail', compact('photos', 'photo_gallery_name', 'setting', 'nav_pages'));
+        return view('site.photo_gallery.detail', compact('photos', 'photo_gallery', 'setting', 'nav_pages'));
     }
 
     public function videoGallery()
@@ -141,11 +140,10 @@ class HomeController extends Controller
         $nav_pages = Page::where('status', '=', true)->get()->sortBy('order_no');
 
         $video_gallery = VideoGallery::find($id);
-        $video_gallery_name = $video_gallery->title;
 
         $videos = Video::where('status', '=', true)->where('video_gallery_id', '=', $id)->get()->sortByDesc('created_at');
 
-        return view('site.video_gallery.detail', compact('videos', 'video_gallery_name', 'setting', 'nav_pages'));
+        return view('site.video_gallery.detail', compact('videos', 'video_gallery', 'setting', 'nav_pages'));
     }
 
     public function album()
@@ -176,6 +174,30 @@ class HomeController extends Controller
         $new_albums = Album::where('status', '=', true)->take(4)->get()->sortByDesc('created_at');
 
         return view('site.album.detail', compact('album', 'songs', 'setting', 'nav_pages', 'users', 'new_albums', 'advertisements'));
+    }
+
+    public function document($id)
+    {
+        $song = Song::find($id);
+
+        if (!empty($song->document) && file_exists(public_path("/uploads/albums/" . $song->album->folder_name . '/songs/' . $song->document))) {
+            $file = public_path("/uploads/albums/" . $song->album->folder_name . '/songs/' . $song->document);
+
+            $headers = ['Content-Type: application/pdf', 'Content-Type: application/image', 'Content-Type: application/audio', 'Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+        }
+        return response()->download($file, $song->document, $headers);
+    }
+
+    public function recording($id)
+    {
+        $song = Song::find($id);
+
+        if (!empty($song->recording) && file_exists(public_path("/uploads/albums/" . $song->album->folder_name . '/songs/' . $song->recording))) {
+            $file = public_path("/uploads/albums/" . $song->album->folder_name . '/songs/' . $song->recording);
+
+            $headers = ['Content-Type: application/pdf', 'Content-Type: application/image', 'Content-Type: application/audio', 'Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+        }
+        return response()->download($file, $song->recording, $headers);
     }
 
     public function news()

@@ -117,38 +117,34 @@
                                 </div>
                                 <h2>Bize Ulaşın</h2>
                             </div>
-                            <form>
+                            <form action="{{route('contact.sendToEMail')}}" method="post">
+                                {{csrf_field()}}
                                 <label>
                                     <i class="icon-user9"></i>
-                                    <input type="text" required="" class=" " value="Adınız ve Soyadınız"
-                                           onblur="if(this.value == '') { this.value = 'Adınız ve Soyadınız'; }"
-                                           onfocus="if(this.value == 'Adınız ve Soyadınız') { this.value = ''; }"
-                                           name="contact_name">
+                                    <input type="text" required="" class=" " placeholder="Adınız ve Soyadınız"
+                                           style="text-transform: none" name="contact_name">
                                 </label>
                                 <label>
                                     <i class="icon-mail6"></i>
-                                    <input type="email" required="" class=" " value="E-Posta Adresiniz"
-                                           onblur="if(this.value == '') { this.value = 'E-Posta Adresiniz'; }"
-                                           onfocus="if(this.value == 'E-Posta Adresiniz') { this.value = ''; }"
+                                    <input type="email" required="" class=" " placeholder="E-Posta Adresiniz"
+                                           style="text-transform: none"
                                            name="contact_email">
                                 </label>
                                 <label>
                                     <i class="icon-phone8"></i>
-                                    <input type="text" required="" class=" " value="Telefon"
-                                           onblur="if(this.value == '') { this.value = 'Telefon'; }"
-                                           onfocus="if(this.value == 'Telefon') { this.value = ''; }"
-                                           name="contact_name">
+                                    <input type="text" class=" " placeholder="Telefon" style="text-transform: none"
+                                           name="contact_phone">
                                 </label>
                                 <label>
                                     <i class="icon-text"></i>
-                                    <input type="text" required="" class=" " value="Konu"
-                                           onblur="if(this.value == '') { this.value = 'Konu'; }"
-                                           onfocus="if(this.value == 'Konu') { this.value = ''; }"
-                                           name="contact_name">
+                                    <input type="text" required="" class=" " placeholder="Konu"
+                                           style="text-transform: none"
+                                           name="contact_subject">
                                 </label>
                                 <label class="textaera-sec">
                                     <i class="icon-text"></i>
-                                    <textarea placeholder="Mesajınız"></textarea>
+                                    <textarea placeholder="Mesajınız" style="text-transform: none"
+                                              name="message"></textarea>
                                 </label>
                                 <label class="submit-sec">
                                     <input type="submit" value="Gönder">

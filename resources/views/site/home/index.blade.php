@@ -1,4 +1,4 @@
-@extends('site/template/layout')
+@extends('site.template.layout')
 
 @section('content')
     @if(isset($pages) && sizeof($pages) > 0)
@@ -11,17 +11,19 @@
                                 <div class="main-heading">
                                     <h2>{{$pages[0]->title}}</h2>
                                 </div>
-                                <p>{!! str_limit(str_replace(array('<b>','</b>'), array('<strong>','</strong>'), $pages[0]->content), 1200) !!}</p>
-                                <a href="#" class="px-botton">BAŞVURU FORMU</a>
+                                {!! str_limit(str_replace(array('<b>','</b>'), array('<strong>','</strong>'), $pages[0]->content), 1200) !!}
+                                <p>
+                                    <a href="#" class="px-botton">BAŞVURU FORMU</a>
+                                </p>
                             </div>
                         </article>
                         <article class="col-md-6">
                             <figure>
                                 @if(!empty($pages[0]->image) && file_exists(public_path("/uploads/pages/".$pages[0]->image)))
-                                    <img src="/uploads/pages/{{$pages[0]->image}}" alt="{{$pages[0]->title}}"
+                                    <img src="/uploads/pages/{{$pages[0]->image}}"
                                          style="width: 520px; height: 520px"/>
                                 @else
-                                    <img src="/site/assets/images/default/default_page.jpg" alt="{{$pages[0]->title}}"
+                                    <img src="/site/assets/images/default/default_page.jpg"
                                          style="width: 520px; height: 520px"/>
                                 @endif
                             </figure>

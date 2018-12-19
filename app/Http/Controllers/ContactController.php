@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactForm;
 use App\Page;
 use App\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -86,5 +88,33 @@ class ContactController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function sendToEmail(request $request)
+    {
+        $setting = Setting::get()->first();
+
+        $this->validate(request(), array(
+            'contact_name' => 'required',
+            'contact_email' => 'required',
+            'message' => 'required',
+        ));
+
+        $array = array(
+            'name' => request('contact_name'),
+            'email' => request('contact_email'),
+            'phone' => request('contact_phone'),
+            'subject' => request('contact_subject'),
+            'message' => request('message'),
+        );
+
+        Mail::to($setting->email)->send(new ContactForm($array));
+
+        alert()
+            ->success('Mail Gönderildi!')
+            ->showConfirmButton()
+            ->showCloseButton();
+
+        return redirect()->route('contact.index');
     }
 }

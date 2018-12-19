@@ -104,7 +104,7 @@
                             </div>
                             <div class="rich-editor-text">
                                 <div class="col-md-12">
-                                    <p>{!! str_replace(array('<b>','</b>'), array('<strong>','</strong>'), $album->description) !!}</p>
+                                    {!! str_replace(array('<b>','</b>'), array('<strong>','</strong>'), $album->description) !!}
                                 </div>
                             </div>
                             <div class="px-team grid">
@@ -149,7 +149,7 @@
                                         <li><a href="#">{{$item->song_name}}</a>
                                             @if(!empty($item->document))
                                                 <span style="float: right; padding-left: 5px">
-                                                <a href="{{route('songs.document',$item->id)}}"
+                                                <a href="{{route('download.document',$item->id)}}"
                                                    title="{{$item->song_name}} dokümanı indir"><i
                                                         class="icon icon-download5"></i></a>
                                             </span>
@@ -157,7 +157,7 @@
 
                                             @if(!empty($item->recording))
                                                 <span style="float: right; padding-left: 5px">
-                                                <a href="{{route('songs.recording',$item->id)}}"
+                                                <a href="{{route('download.recording',$item->id)}}"
                                                    title="{{$item->song_name}} ses dosyasını indir"><i
                                                         class="icon icon-music6"></i></a>
                                             </span>
@@ -250,7 +250,7 @@
                         @foreach($songs as $item)
                     {
                         title: "{{$item->song_name}}",
-                        mp3: "http://127.0.0.1:8000/uploads/albums/{{$item->album->folder_name}}/songs/{{$item->recording}}"
+                        mp3: "{{request()->root()}}/uploads/albums/{{$item->album->folder_name}}/songs/{{$item->recording}}"
                     },
                     @endforeach
                 ], {

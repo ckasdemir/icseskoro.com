@@ -55,9 +55,12 @@ Route::get('/photoGallery', 'HomeController@photoGallery')->name('site.photoGall
 Route::get('/photoGallery/detail/{id}', 'HomeController@photoGalleryDetail')->name('site.photoGalleryDetail');
 Route::get('/videoGallery', 'HomeController@videoGallery')->name('site.videoGallery');
 Route::get('/videoGallery/detail/{id}', 'HomeController@videoGalleryDetail')->name('site.videoGalleryDetail');
-Route::get('/album', 'HomeController@album')->name('site.albums');
-Route::get('/album/detail/{id}', 'HomeController@albumDetail')->name('site.albumDetail');
-Route::resource('/contact', 'ContactController');
+Route::get('/album', 'HomeController@album')->name('site.albums')->middleware('verified');
+Route::get('/album/detail/{id}', 'HomeController@albumDetail')->name('site.albumDetail')->middleware('verified');
+Route::get('/download/document/{id}', 'HomeController@document')->name('download.document')->middleware('verified');
+Route::get('/download/recording/{id}', 'HomeController@recording')->name('download.recording')->middleware('verified');
+Route::get('/contact', 'ContactController@index')->name('contact.index');
+Route::post('/send', 'ContactController@sendToEMail')->name('contact.sendToEMail');
 Route::get('/news', 'HomeController@news')->name('site.news');
 Route::get('/news/detail/{id}', 'HomeController@newsDetail')->name('site.newsDetail');
 Route::get('/page/{id}/{slug}', 'HomeController@page')->name('site.page');

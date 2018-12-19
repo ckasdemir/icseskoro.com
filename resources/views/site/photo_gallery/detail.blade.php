@@ -8,13 +8,16 @@
             <div class="px-table">
                 <div class="px-tablerow">
                     <div class="px-pageinfo">
-                        <h2>{{$photo_gallery_name}}</h2>
+                        <h2>{{$photo_gallery->title}}</h2>
+                        @if(!empty($photo_gallery->description))
+                            <span>{{$photo_gallery->description}}</span>
+                        @endif
                     </div>
                     <div class="breadcrumbs">
                         <ul>
                             <li><a href="{{route('site.index')}}">Anasayfa</a></li>
                             <li><a href="{{route('site.photoGallery')}}">Foto Galeri</a></li>
-                            <li class="active">{{$photo_gallery_name}}</li>
+                            <li class="active">{{$photo_gallery->title}}</li>
                         </ul>
                     </div>
                 </div>
