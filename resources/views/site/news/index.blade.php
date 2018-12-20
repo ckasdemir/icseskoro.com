@@ -29,7 +29,6 @@
                     <div class="page-content">
                         <section class="px-blog large">
                             <div class="col-md-12">
-                                <h3>Haberler</h3>
                                 <div class="row">
                                     @foreach($news as $item)
                                         <article class="col-md-12">

@@ -217,4 +217,24 @@ class PhotoController extends Controller
             return back();
         }
     }
+
+    public function active($id)
+    {
+        $find = Photo::find($id);
+        $find->status = true;
+
+        $find->save();
+
+        return redirect()->route('photos.index');
+    }
+
+    public function passive($id)
+    {
+        $find = Photo::find($id);
+        $find->status = false;
+
+        $find->save();
+
+        return redirect()->route('photos.index');
+    }
 }

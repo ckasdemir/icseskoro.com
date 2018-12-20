@@ -190,4 +190,24 @@ class NewsController extends Controller
             return back();
         }
     }
+
+    public function active($id)
+    {
+        $find = News::find($id);
+        $find->status = true;
+
+        $find->save();
+
+        return redirect()->route('news.index');
+    }
+
+    public function passive($id)
+    {
+        $find = News::find($id);
+        $find->status = false;
+
+        $find->save();
+
+        return redirect()->route('news.index');
+    }
 }

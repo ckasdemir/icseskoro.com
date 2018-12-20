@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ContactForm;
+use App\Message;
 use App\Page;
 use App\Setting;
 use Illuminate\Http\Request;
@@ -90,7 +91,7 @@ class ContactController extends Controller
         //
     }
 
-    public function sendToEmail(request $request)
+    public function sendToMessage(request $request)
     {
         $setting = Setting::get()->first();
 
@@ -100,20 +101,31 @@ class ContactController extends Controller
             'message' => 'required',
         ));
 
-        $array = array(
-            'name' => request('contact_name'),
-            'email' => request('contact_email'),
-            'phone' => request('contact_phone'),
-            'subject' => request('contact_subject'),
-            'message' => request('message'),
-        );
+        $message = new Message();
+        $message->name = request('contact_name');
+        $message->email = request('contact_email');
+        $message->phone = request('contact_phone');
+        $message->subject = request('contact_subject');
+        $message->message = request('message');
+        $message->is_read = false;
 
-        Mail::to($setting->email)->send(new ContactForm($array));
+        $message->save();
 
-        alert()
-            ->success('Mail Gönderildi!')
-            ->showConfirmButton()
-            ->showCloseButton();
+        if ($message) {
+            alert()
+                ->success('İşlem tamamlandı!', 'Mesajınız başarıyla gönderilmiştir.')
+                ->showConfirmButton()
+                ->showCloseButton();
+
+            return redirect()->route('contact.index');
+        } else {
+            alert()
+                ->error('Hata!', 'Mesaj gönderme işlemi başarısız.')
+                ->showConfirmButton()
+                ->showCloseButton();
+
+            return back();
+        }
 
         return redirect()->route('contact.index');
     }

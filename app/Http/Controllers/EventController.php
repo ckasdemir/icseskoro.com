@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,9 +16,11 @@ class EventController extends Controller
      */
     public function index()
     {
+        $message_count = Message::where('is_read', '=', false)->count();
+
         $events = Event::all()->sortByDesc('created_at');
 
-        return view('admin.event.index', compact('events'));
+        return view('admin.event.index', compact('events', 'message_count'));
     }
 
     /**
@@ -209,5 +212,25 @@ class EventController extends Controller
 
             return back();
         }
+    }
+
+    public function active($id)
+    {
+        $find = Event::find($id);
+        $find->status = true;
+
+        $find->save();
+
+        return redirect()->route('events.index');
+    }
+
+    public function passive($id)
+    {
+        $find = Event::find($id);
+        $find->status = false;
+
+        $find->save();
+
+        return redirect()->route('events.index');
     }
 }

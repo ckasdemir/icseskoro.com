@@ -223,4 +223,24 @@ class PhotoGalleryController extends Controller
             }
         }
     }
+
+    public function active($id)
+    {
+        $find = PhotoGallery::find($id);
+        $find->status = true;
+
+        $find->save();
+
+        return redirect()->route('photo_gallery.index');
+    }
+
+    public function passive($id)
+    {
+        $find = PhotoGallery::find($id);
+        $find->status = false;
+
+        $find->save();
+
+        return redirect()->route('photo_gallery.index');
+    }
 }

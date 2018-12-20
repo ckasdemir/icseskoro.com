@@ -50,11 +50,11 @@
                                     <td style="text-align: center">{!! date('d.m.Y H:i:s', strtotime($item->created_at)) !!}</td>
                                     <td style="text-align: center">
                                         @if($item->status == 1)
-                                            <a href="{{route('users.status', $item->id)}}">
+                                            <a href="{{route('users.passive', $item->id)}}">
                                                 <i class="icon-ok text-success" title="Aktif"></i>
                                             </a>
                                         @else
-                                            <a href="{{route('users.status', $item->id)}}">
+                                            <a href="{{route('users.active', $item->id)}}">
                                                 <i class="icon-off text-error" title="Pasif"></i>
                                             </a>
                                         @endif
@@ -65,7 +65,8 @@
                                                style="float: left; margin-right: 5px"><i
                                                     class="icon icon-edit"></i> Admini Kaldır</a>
                                         @else
-                                            <a href="{{route('users.role', $item->id)}}" class="btn btn-warning btn-mini"
+                                            <a href="{{route('users.role', $item->id)}}"
+                                               class="btn btn-warning btn-mini"
                                                style="float: left; margin-right: 5px"><i
                                                     class="icon icon-edit"></i> Admin Yap</a>
                                         @endif

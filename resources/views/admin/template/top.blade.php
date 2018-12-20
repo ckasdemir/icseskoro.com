@@ -17,17 +17,15 @@
                 <li><a href="{{route('admin.logout')}}"><i class="icon-signout"></i> Çıkış</a></li>
             </ul>
         </li>
-        <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages"
+        <li class="dropdown" id="menu-messages"><a href="{{route('messages.index')}}" data-toggle="dropdown"
+                                                   data-target="#menu-messages"
                                                    class="dropdown-toggle"><i class="icon icon-envelope"></i> <span
-                    class="text">Messages</span> <span class="label label-important">5</span> <b class="caret"></b></a>
+                    class="text">Messages</span> <span
+                    class="label label-important">{{ \App\Message::where('is_read','=',false)->count() }}</span> <b
+                    class="caret"></b></a>
             <ul class="dropdown-menu">
-                <li><a class="sAdd" title="" href="#"><i class="icon-plus"></i> new message</a></li>
-                <li class="divider"></li>
-                <li><a class="sInbox" title="" href="#"><i class="icon-envelope"></i> inbox</a></li>
-                <li class="divider"></li>
-                <li><a class="sOutbox" title="" href="#"><i class="icon-arrow-up"></i> outbox</a></li>
-                <li class="divider"></li>
-                <li><a class="sTrash" title="" href="#"><i class="icon-trash"></i> trash</a></li>
+                <li><a class="sInbox" title="" href="{{route('messages.index')}}"><i class="icon-envelope"></i> gelen
+                        kutusu</a></li>
             </ul>
         </li>
         <li class=""><a title="" href="{{route('settings.index')}}"><i class="icon icon-cog"></i> <span class="text">Ayarlar</span></a>

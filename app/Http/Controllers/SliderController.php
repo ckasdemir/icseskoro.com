@@ -223,4 +223,24 @@ class SliderController extends Controller
 
         return redirect()->route('sliders.index');
     }
+
+    public function active($id)
+    {
+        $find = Slider::find($id);
+        $find->status = true;
+
+        $find->save();
+
+        return redirect()->route('sliders.index');
+    }
+
+    public function passive($id)
+    {
+        $find = Slider::find($id);
+        $find->status = false;
+
+        $find->save();
+
+        return redirect()->route('sliders.index');
+    }
 }

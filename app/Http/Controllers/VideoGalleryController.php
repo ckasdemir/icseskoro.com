@@ -202,4 +202,24 @@ class VideoGalleryController extends Controller
             }
         }
     }
+
+    public function active($id)
+    {
+        $find = VideoGallery::find($id);
+        $find->status = true;
+
+        $find->save();
+
+        return redirect()->route('video_gallery.index');
+    }
+
+    public function passive($id)
+    {
+        $find = VideoGallery::find($id);
+        $find->status = false;
+
+        $find->save();
+
+        return redirect()->route('video_gallery.index');
+    }
 }

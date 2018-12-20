@@ -117,7 +117,7 @@
                                 </div>
                                 <h2>Bize Ulaşın</h2>
                             </div>
-                            <form action="{{route('contact.sendToEMail')}}" method="post">
+                            <form action="{{route('contact.sendToMessage')}}" method="post">
                                 {{csrf_field()}}
                                 <label>
                                     <i class="icon-user9"></i>

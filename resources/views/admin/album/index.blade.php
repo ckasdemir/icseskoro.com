@@ -55,9 +55,13 @@
                                     <td style="text-align: center">{!! date('d.m.Y H:i:s', strtotime($item->created_at)) !!}</td>
                                     <td style="text-align: center">
                                         @if($item->status == 1)
-                                            <i class="icon-ok text-success" title="Aktif"></i>
+                                            <a href="{{route('albums.passive', $item->id)}}">
+                                                <i class="icon-ok text-success" title="Aktif"></i>
+                                            </a>
                                         @else
-                                            <i class="icon-off text-error" title="Pasif"></i>
+                                            <a href="{{route('albums.active', $item->id)}}">
+                                                <i class="icon-off text-error" title="Pasif"></i>
+                                            </a>
                                         @endif
                                     </td>
                                     <td style="text-align: center">

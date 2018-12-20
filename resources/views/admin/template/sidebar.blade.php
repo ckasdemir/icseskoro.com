@@ -38,6 +38,8 @@
         <li><a href="{{route('advertisements.index')}}"><i class="icon icon-th-large"></i> <span>Reklam Yönetimi</span></a>
         </li>
         <li><a href="{{route('users.index')}}"><i class="icon icon-group"></i> <span>Kullanıcı Yönetimi</span></a></li>
+        <li><a href="{{route('messages.index')}}"><i class="icon icon-envelope"></i> <span>Mesajlar</span></a>
+        </li>
         <li><a href="{{route('settings.index')}}"><i class="icon icon-cog"></i> <span>Ayarlar</span></a></li>
         <li><a href="{{route('site.index')}}" target="_blank"><i class="icon icon-link"></i> <span>Siteye git</span></a>
         </li>

@@ -135,10 +135,10 @@
                                                     </li>
                                                 </ul>
                                                 @if($item->is_free || $item->price == 0)
-                                                    <a href="{{route('site.eventDetail', $item->id)}}"
+                                                    <a href="#"
                                                        class="ticket-btn" style="background-color: #ffc600">Ücretsiz</a>
                                                 @else
-                                                    <a href="{{route('site.eventDetail', $item->id)}}"
+                                                    <a href="#"
                                                        class="ticket-btn"
                                                        style="background-color: #ffc600">{{$item->price}}₺</a>
                                                 @endif

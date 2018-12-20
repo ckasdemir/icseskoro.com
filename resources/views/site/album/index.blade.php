@@ -47,7 +47,9 @@
                                 <div class="text">
                                     <h5><a href="{{route('site.albumDetail', $item->id)}}">{{$item->album_name}}</a>
                                     </h5>
-                                    <a href="#" class="tracks-btn">{{$item->song->count()}} şarkı</a>
+                                    <a href="#"
+                                       class="tracks-btn">{{\App\Song::where('album_id','=', $item->id)->where('status','=',true)->count()}}
+                                        şarkı</a>
                                 </div>
                             </article>
                         @endforeach

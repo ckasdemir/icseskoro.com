@@ -14,7 +14,8 @@
                     <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>
                         <h5>Reklamlar</h5>
                         <div style="float: right; margin: 3px 10px 3px 3px; overflow: hidden">
-                            <a href="{{route('advertisements.create')}}" class="btn btn-success"><i class="icon-plus"></i> Yeni
+                            <a href="{{route('advertisements.create')}}" class="btn btn-success"><i
+                                    class="icon-plus"></i> Yeni
                                 Reklam Ekle</a>
                         </div>
                     </div>
@@ -35,7 +36,8 @@
                                 <tr class="gradeA">
                                     <td style="text-align: center">
                                         @if(!empty($item->image))
-                                            <a href="/uploads/advertisements/{{$item->image}}" target="_blank" class="tip"
+                                            <a href="/uploads/advertisements/{{$item->image}}" target="_blank"
+                                               class="tip"
                                                data-original-title="Resmi göster"><i
                                                     class="icon icon-picture text-success"></i>
                                             </a>
@@ -50,13 +52,18 @@
                                     <td style="text-align: center">{!! date('d.m.Y H:i:s', strtotime($item->created_at)) !!}</td>
                                     <td style="text-align: center">
                                         @if($item->status == 1)
-                                            <i class="icon-ok text-success" title="Aktif"></i>
+                                            <a href="{{route('advertisements.passive', $item->id)}}">
+                                                <i class="icon-ok text-success" title="Aktif"></i>
+                                            </a>
                                         @else
-                                            <i class="icon-off text-error" title="Pasif"></i>
+                                            <a href="{{route('advertisements.active', $item->id)}}">
+                                                <i class="icon-off text-error" title="Pasif"></i>
+                                            </a>
                                         @endif
                                     </td>
                                     <td style="text-align: center">
-                                        <a href="{{route('advertisements.edit', $item->id)}}" class="btn btn-info btn-mini"
+                                        <a href="{{route('advertisements.edit', $item->id)}}"
+                                           class="btn btn-info btn-mini"
                                            style="float: left; margin-right: 5px"><i
                                                 class="icon icon-edit"></i> Düzenle</a>
                                         {!! Form::model($item,['route'=>['advertisements.destroy',$item->id],'method'=>'DELETE', 'style'=>'float:left']) !!}

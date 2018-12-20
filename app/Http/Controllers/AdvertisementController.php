@@ -196,4 +196,24 @@ class AdvertisementController extends Controller
             return back();
         }
     }
+
+    public function active($id)
+    {
+        $find = Advertisement::find($id);
+        $find->status = true;
+
+        $find->save();
+
+        return redirect()->route('advertisements.index');
+    }
+
+    public function passive($id)
+    {
+        $find = Advertisement::find($id);
+        $find->status = false;
+
+        $find->save();
+
+        return redirect()->route('advertisements.index');
+    }
 }

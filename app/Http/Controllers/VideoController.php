@@ -180,4 +180,24 @@ class VideoController extends Controller
             return back();
         }
     }
+
+    public function active($id)
+    {
+        $find = Video::find($id);
+        $find->status = true;
+
+        $find->save();
+
+        return redirect()->route('videos.index');
+    }
+
+    public function passive($id)
+    {
+        $find = Video::find($id);
+        $find->status = false;
+
+        $find->save();
+
+        return redirect()->route('videos.index');
+    }
 }

@@ -164,35 +164,6 @@ class UserController extends Controller
         }
     }
 
-    public function status($id)
-    {
-        $user = User::find($id);
-
-        if ($user->status == true) {
-            $user->status = false;
-        } else {
-            $user->status = true;
-        }
-
-        $user->save();
-
-        if ($user) {
-            alert()
-                ->success('İşlem tamamlandı!', 'Kullanıcı durumu başarıyla güncellenmiştir.')
-                ->showConfirmButton()
-                ->showCloseButton();
-
-            return redirect()->route('users.index');
-        } else {
-            alert()
-                ->error('Hata!', 'Kullanıcı durumu güncelleme işlemi başarısız.')
-                ->showConfirmButton()
-                ->showCloseButton();
-
-            return back();
-        }
-    }
-
     public function role($id)
     {
         $msg = "";
@@ -223,5 +194,25 @@ class UserController extends Controller
 
             return back();
         }
+    }
+
+    public function active($id)
+    {
+        $find = User::find($id);
+        $find->status = true;
+
+        $find->save();
+
+        return redirect()->route('users.index');
+    }
+
+    public function passive($id)
+    {
+        $find = User::find($id);
+        $find->status = false;
+
+        $find->save();
+
+        return redirect()->route('users.index');
     }
 }

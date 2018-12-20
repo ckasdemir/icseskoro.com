@@ -226,4 +226,24 @@ class PartnerController extends Controller
 
         return redirect()->route('partners.index');
     }
+
+    public function active($id)
+    {
+        $find = Partner::find($id);
+        $find->status = true;
+
+        $find->save();
+
+        return redirect()->route('partners.index');
+    }
+
+    public function passive($id)
+    {
+        $find = Partner::find($id);
+        $find->status = false;
+
+        $find->save();
+
+        return redirect()->route('partners.index');
+    }
 }

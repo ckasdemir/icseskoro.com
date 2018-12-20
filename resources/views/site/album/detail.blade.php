@@ -42,7 +42,7 @@
                                         @endif
                                     </figure>
                                     <div class="text">
-                                        <a href="#" class="tracks-btn">{{$album->song->count()}} şarkı</a>
+                                        <a href="#" class="tracks-btn">{{\App\Song::where('album_id','=', $album->id)->where('status','=',true)->count()}} şarkı</a>
                                         <ul class="post-options">
                                             <li><i class="icon-calendar6"></i>Tarih:
                                                 <span>{{date('d.m.Y', strtotime($album->created_at))}}</span></li>
@@ -215,7 +215,7 @@
                                     @endif
                                 </figure>
                                 <div class="text">
-                                    <span>{{$item->song->count()}} ŞARKI</span>
+                                    <span>{{\App\Song::where('album_id','=', $album->id)->where('status','=',true)->count()}} ŞARKI</span>
                                     <h5><a href="{{route('site.albumDetail', $item->id)}}">{{$item->album_name}}</a>
                                     </h5>
                                 </div>
