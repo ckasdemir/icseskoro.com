@@ -17,9 +17,11 @@ class MessageController extends Controller
      */
     public function index()
     {
+        $setting = Setting::get()->first();
+
         $messages = Message::all()->sortByDesc('created_at');
 
-        return view('admin.message.index', compact('messages'));
+        return view('admin.message.index', compact('messages', 'setting'));
     }
 
     /**
@@ -51,13 +53,15 @@ class MessageController extends Controller
      */
     public function show($id)
     {
+        $setting = Setting::get()->first();
+
         $message = Message::find($id);
 
         $message->is_read = true;
 
         $message->save();
 
-        return view('admin.message.show', compact('message'));
+        return view('admin.message.show', compact('message', 'setting'));
     }
 
     /**
