@@ -213,9 +213,14 @@ class SongController extends Controller
      */
     public function destroy($id)
     {
+        $find = Song::find($id);
+        $albumFolder = Album::find($find->album_id)->folder_name;
+
         $song = Song::destroy($id);
 
         if ($song) {
+            unlink('uploads/albums/' . $albumFolder . '/songs/' . $find->document);
+            unlink('uploads/albums/' . $albumFolder . '/songs/' . $find->recording);
             alert()
                 ->success('İşlem tamamlandı!', 'Şarkı silme işlemi başarıyla tamamlanmıştır.')
                 ->showConfirmButton()

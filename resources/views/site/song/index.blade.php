@@ -33,8 +33,15 @@
                                         <article class="col-md-12">
                                             <div class="px-result blog">
                                                 <div class="px-media">
-                                                    <figure><img src="/site/assets/extra-images/Results_01.png"
-                                                                 class="img-responsive" alt="blog">
+                                                    <figure>
+                                                        @if(!empty($item->album->image) && file_exists(public_path("/uploads/albums/".$item->album->folder_name."/".$item->image)))
+                                                            <img
+                                                                src="/uploads/albums/{{$item->album->folder_name}}/{{$item->album->image}}"
+                                                                class="img-responsive" alt="{{$item->song_name}}">
+                                                        @else
+                                                            <img src="/site/assets/images/default/default_album.jpg"
+                                                                 class="img-responsive" alt="{{$item->song_name}}">
+                                                        @endif
                                                         <figcaption><a href="#."></a></figcaption>
                                                     </figure>
                                                 </div>
@@ -151,7 +158,7 @@
                                     style="font-size: 14px; font-weight: 500; position: absolute; bottom:15px; left:20px; display: block;">Şarkı yükle</span>
                             </label>
                             <label class="submit-sec">
-                                <input type="submit" value="Gönder">
+                                <input type="submit" value="YÜKLE">
                             </label>
                         </form>
                     </div>
