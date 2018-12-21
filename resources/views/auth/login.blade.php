@@ -59,7 +59,7 @@
                             </div>
                             <h3>ÜYELİK FORMU</h3>
                         </div>
-                        <form action="{{ route('register') }}" method="post">
+                        <form action="{{ route('register') }}" method="post" >
                             {{csrf_field()}}
                             <label style="margin: 0 0 20px 0; width: 100%">
                                 <i class="icon-user2"></i>
