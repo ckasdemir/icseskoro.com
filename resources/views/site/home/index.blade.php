@@ -18,10 +18,10 @@
                             <figure>
                                 @if(!empty($pages[0]->image) && file_exists(public_path("/uploads/pages/".$pages[0]->image)))
                                     <img src="/uploads/pages/{{$pages[0]->image}}"
-                                         style="width: 520px; height: 520px"/>
+                                         style="max-width: 520px; max-height: 520px"/>
                                 @else
                                     <img src="/site/assets/images/default/default_page.jpg"
-                                         style="width: 520px; height: 520px"/>
+                                         style="max-width: 520px; max-height: 520px"/>
                                 @endif
                             </figure>
                         </article>
@@ -316,7 +316,7 @@
                                     <li>
                                         <a href="{{$item->url}}" target="_blank">
                                             <img src="/uploads/partners/{{$item->logo}}"
-                                                 style="width: 140px; height: 68px;"
+                                                 style="max-width: 140px; max-height: 68px;"
                                                  alt="{{$item->partner_name}}"/>
                                         </a>
                                     </li>

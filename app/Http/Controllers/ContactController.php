@@ -93,8 +93,6 @@ class ContactController extends Controller
 
     public function sendToMessage(request $request)
     {
-        $setting = Setting::get()->first();
-
         $this->validate(request(), array(
             'contact_name' => 'required',
             'contact_email' => 'required',

@@ -28,12 +28,8 @@
                         </li>
                         <li><a href="{{route('contact.index')}}">İLETİŞİM</a></li>
                         @if(!Auth::check())
-                            <li><a href="#"><i class="icon icon-user2"></i></a>
-                                <ul>
-                                    <li><a href="{{route('login')}}">GİRİŞ YAP</a></li>
-                                    <li><a href="{{route('register')}}">ÜYE OL</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="{{route('login')}}" title="Kullanıcı Girişi"><i
+                                        class="icon icon-user2"></i></a></li>
                         @else
                             <li>
                                 <a href="#"><i class="icon-user2"></i> {{Auth::user()->name}}</a>

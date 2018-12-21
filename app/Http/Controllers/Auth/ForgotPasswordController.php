@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Page;
+use App\Setting;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
 class ForgotPasswordController extends Controller
@@ -28,5 +30,13 @@ class ForgotPasswordController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    public function showLinkRequestForm()
+    {
+        $setting = Setting::get()->first();
+        $nav_pages = Page::where('status', '=', true)->get()->sortBy('order_no');
+
+        return view('auth.passwords.email', compact('setting', 'nav_pages'));
     }
 }
