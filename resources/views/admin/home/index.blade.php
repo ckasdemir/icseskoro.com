@@ -213,4 +213,25 @@
         }
     </script>
 
+    @if($unreaded_message > 0)
+        <script type="text/javascript">
+            $.gritter.add({
+                title: 'Mesaj Bildirimi',
+                text: '{{$unreaded_message}} adet okunmamış mesajınız var',
+                image: '{{request()->root()}}/admin/img/demo/envelope.png',
+                sticky: false
+            });
+        </script>
+    @endif
+
+    @if($pending_users > 0)
+        <script type="text/javascript">
+            $.gritter.add({
+                title: 'Kullanıcı bildirimi',
+                text: '{{$pending_users}} adet yeni üyeniz var',
+                sticky: false
+            });
+        </script>
+    @endif
+
 @endsection

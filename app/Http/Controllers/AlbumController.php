@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Album;
 use App\RecentActivity;
+use App\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,9 +17,11 @@ class AlbumController extends Controller
      */
     public function index()
     {
+        $setting = Setting::get()->first();
+
         $albums = Album::all()->sortByDesc('created_at');
 
-        return view('admin.album.index', compact('albums'));
+        return view('admin.album.index', compact('albums','setting'));
     }
 
     /**
@@ -28,7 +31,9 @@ class AlbumController extends Controller
      */
     public function create()
     {
-        return view('admin.album.create');
+        $setting = Setting::get()->first();
+
+        return view('admin.album.create',compact('setting'));
     }
 
     /**
@@ -114,9 +119,11 @@ class AlbumController extends Controller
      */
     public function edit($id)
     {
+        $setting = Setting::get()->first();
+
         $album = Album::find($id);
 
-        return view('admin.album.edit', compact('album'));
+        return view('admin.album.edit', compact('album','setting'));
     }
 
     /**

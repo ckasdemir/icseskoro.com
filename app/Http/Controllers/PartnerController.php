@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Partner;
+use App\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -16,9 +17,11 @@ class PartnerController extends Controller
      */
     public function index()
     {
+        $setting = Setting::get()->first();
+
         $partners = Partner::all()->sortByDesc('order_no');
 
-        return view('admin.partner.index', compact('partners'));
+        return view('admin.partner.index', compact('partners', 'setting'));
     }
 
     /**
@@ -28,7 +31,9 @@ class PartnerController extends Controller
      */
     public function create()
     {
-        return view('admin.partner.create');
+        $setting = Setting::get()->first();
+
+        return view('admin.partner.create', compact('setting'));
     }
 
     /**
@@ -108,9 +113,11 @@ class PartnerController extends Controller
      */
     public function edit($id)
     {
+        $setting = Setting::get()->first();
+
         $partner = Partner::find($id);
 
-        return view('admin.partner.edit', compact('partner'));
+        return view('admin.partner.edit', compact('partner','setting'));
     }
 
     /**

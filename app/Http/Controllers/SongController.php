@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Album;
 use App\RecentActivity;
+use App\Setting;
 use App\Song;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,9 +18,11 @@ class SongController extends Controller
      */
     public function index()
     {
+        $setting = Setting::get()->first();
+
         $songs = Song::all()->sortByDesc('created_at');
 
-        return view('admin.song.index', compact('songs'));
+        return view('admin.song.index', compact('songs', 'setting'));
     }
 
     /**
@@ -29,9 +32,11 @@ class SongController extends Controller
      */
     public function create()
     {
+        $setting = Setting::get()->first();
+
         $albums = Album::where('status', '=', true)->get()->sortBy('album_name');
 
-        return view('admin.song.create', compact('albums'));
+        return view('admin.song.create', compact('albums', 'setting'));
     }
 
     /**
@@ -138,11 +143,13 @@ class SongController extends Controller
      */
     public function edit($id)
     {
+        $setting = Setting::get()->first();
+
         $albums = Album::where('status', '=', true)->get()->sortBy('album_name');
 
         $song = Song::find($id);
 
-        return view('admin.song.edit', compact('song', 'albums'));
+        return view('admin.song.edit', compact('song', 'albums', 'setting'));
     }
 
     /**

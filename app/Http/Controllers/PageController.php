@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Page;
+use App\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -16,9 +17,11 @@ class PageController extends Controller
      */
     public function index()
     {
+        $setting = Setting::get()->first();
+
         $pages = Page::all()->sortByDesc('order_no');
 
-        return view('admin.page.index', compact('pages'));
+        return view('admin.page.index', compact('pages','setting'));
     }
 
     /**
@@ -28,7 +31,9 @@ class PageController extends Controller
      */
     public function create()
     {
-        return view('admin.page.create');
+        $setting = Setting::get()->first();
+
+        return view('admin.page.create',compact('setting'));
     }
 
     /**
@@ -120,9 +125,11 @@ class PageController extends Controller
      */
     public function edit($id)
     {
+        $setting = Setting::get()->first();
+
         $pages = Page::find($id);
 
-        return view('admin.page.edit', compact('pages'));
+        return view('admin.page.edit', compact('pages','setting'));
     }
 
     /**

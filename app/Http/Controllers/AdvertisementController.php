@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Advertisement;
+use App\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,9 +16,11 @@ class AdvertisementController extends Controller
      */
     public function index()
     {
+        $setting = Setting::get()->first();
+
         $advertisements = Advertisement::all()->sortByDesc('created_at');
 
-        return view('admin.advertisement.index', compact('advertisements'));
+        return view('admin.advertisement.index', compact('advertisements','setting'));
     }
 
     /**
@@ -27,7 +30,9 @@ class AdvertisementController extends Controller
      */
     public function create()
     {
-        return view('admin.advertisement.create');
+        $setting = Setting::get()->first();
+
+        return view('admin.advertisement.create',compact('setting'));
     }
 
     /**
@@ -103,9 +108,11 @@ class AdvertisementController extends Controller
      */
     public function edit($id)
     {
+        $setting = Setting::get()->first();
+
         $advertisement = Advertisement::find($id);
 
-        return view('admin.advertisement.edit', compact('advertisement'));
+        return view('admin.advertisement.edit', compact('advertisement','setting'));
     }
 
     /**

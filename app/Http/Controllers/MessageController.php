@@ -117,6 +117,7 @@ class MessageController extends Controller
     public function replay($id)
     {
         $setting = Setting::get()->first();
+
         $message = Message::find($id);
 
         $data = array(

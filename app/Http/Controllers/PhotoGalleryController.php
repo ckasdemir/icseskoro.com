@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\PhotoGallery;
+use App\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,9 +17,11 @@ class PhotoGalleryController extends Controller
      */
     public function index()
     {
+        $setting = Setting::get()->first();
+
         $photo_gallery = PhotoGallery::all()->sortByDesc('created_at');
 
-        return view('admin.photo_gallery.index', compact('photo_gallery'));
+        return view('admin.photo_gallery.index', compact('photo_gallery', 'setting'));
     }
 
     /**
@@ -28,7 +31,9 @@ class PhotoGalleryController extends Controller
      */
     public function create()
     {
-        return view('admin.photo_gallery.create');
+        $setting = Setting::get()->first();
+
+        return view('admin.photo_gallery.create', compact('setting'));
     }
 
     /**
@@ -109,9 +114,11 @@ class PhotoGalleryController extends Controller
      */
     public function edit($id)
     {
+        $setting = Setting::get()->first();
+
         $photo_gallery = PhotoGallery::find($id);
 
-        return view('admin.photo_gallery.edit', compact('photo_gallery'));
+        return view('admin.photo_gallery.edit', compact('photo_gallery','setting'));
     }
 
     /**

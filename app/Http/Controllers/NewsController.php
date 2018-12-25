@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\News;
+use App\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,9 +16,11 @@ class NewsController extends Controller
      */
     public function index()
     {
+        $setting = Setting::get()->first();
+
         $news = News::all()->sortByDesc('created_at');
 
-        return view('admin.news.index', compact('news'));
+        return view('admin.news.index', compact('news','setting'));
     }
 
     /**
@@ -27,7 +30,9 @@ class NewsController extends Controller
      */
     public function create()
     {
-        return view('admin.news.create');
+        $setting = Setting::get()->first();
+
+        return view('admin.news.create',compact('setting'));
     }
 
     /**
@@ -104,9 +109,11 @@ class NewsController extends Controller
      */
     public function edit($id)
     {
+        $setting = Setting::get()->first();
+
         $news = News::find($id);
 
-        return view('admin.news.edit', compact('news'));
+        return view('admin.news.edit', compact('news','setting'));
     }
 
     /**

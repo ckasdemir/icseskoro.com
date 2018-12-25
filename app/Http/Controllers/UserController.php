@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\RecentActivity;
+use App\Setting;
 use App\User;
 use App\VoiceType;
 use Illuminate\Http\Request;
@@ -18,9 +19,11 @@ class UserController extends Controller
      */
     public function index()
     {
+        $setting = Setting::get()->first();
+
         $users = User::all()->sortBy('name');
 
-        return view('admin.user.index', compact('users'));
+        return view('admin.user.index', compact('users', 'setting'));
     }
 
     /**
@@ -63,11 +66,13 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $setting = Setting::get()->first();
+
         $user = User::find($id);
 
         $voice_types = VoiceType::all()->sortBy('type_name');
 
-        return view('admin.user.edit', compact('user', 'voice_types'));
+        return view('admin.user.edit', compact('user', 'voice_types', 'setting'));
     }
 
     /**

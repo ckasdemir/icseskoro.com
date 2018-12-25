@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use App\Message;
+use App\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,11 +17,13 @@ class EventController extends Controller
      */
     public function index()
     {
+        $setting = Setting::get()->first();
+
         $message_count = Message::where('is_read', '=', false)->count();
 
         $events = Event::all()->sortByDesc('created_at');
 
-        return view('admin.event.index', compact('events', 'message_count'));
+        return view('admin.event.index', compact('events', 'message_count', 'setting'));
     }
 
     /**
@@ -30,7 +33,9 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view('admin.event.create');
+        $setting = Setting::get()->first();
+
+        return view('admin.event.create', compact('setting'));
     }
 
     /**
@@ -117,9 +122,11 @@ class EventController extends Controller
      */
     public function edit($id)
     {
+        $setting = Setting::get()->first();
+
         $events = Event::find($id);
 
-        return view('admin.event.edit', compact('events'));
+        return view('admin.event.edit', compact('events', 'setting'));
     }
 
     /**

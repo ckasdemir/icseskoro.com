@@ -23,10 +23,6 @@
                     class="text">Messages</span> <span
                     class="label label-important">{{ \App\Message::where('is_read','=',false)->count() }}</span> <b
                     class="caret"></b></a>
-            <ul class="dropdown-menu">
-                <li><a class="sInbox" title="" href="{{route('messages.index')}}"><i class="icon-envelope"></i> gelen
-                        kutusu</a></li>
-            </ul>
         </li>
         <li class=""><a title="" href="{{route('settings.index')}}"><i class="icon icon-cog"></i> <span class="text">Ayarlar</span></a>
         </li>

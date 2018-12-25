@@ -40,6 +40,7 @@ $(document).ready(function(){
 	});
 	
 	// === jQeury Gritter, a growl-like notifications === //
+    /*
 	$.gritter.add({
 		title:	'Important Unread messages',
 		text:	'You have 12 unread messages.',
@@ -71,4 +72,5 @@ $(document).ready(function(){
 			sticky: false
 		});		
 	});
+	*/
 });

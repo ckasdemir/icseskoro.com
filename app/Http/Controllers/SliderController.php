@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Setting;
 use App\Slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,9 +17,11 @@ class SliderController extends Controller
      */
     public function index()
     {
+        $setting = Setting::get()->first();
+
         $sliders = Slider::all()->sortByDesc('order_no');
 
-        return view('admin.slider.index', compact('sliders'));
+        return view('admin.slider.index', compact('sliders', 'setting'));
     }
 
     /**
@@ -28,7 +31,9 @@ class SliderController extends Controller
      */
     public function create()
     {
-        return view('admin.slider.create');
+        $setting = Setting::get()->first();
+
+        return view('admin.slider.create', compact('setting'));
     }
 
     /**
@@ -108,9 +113,11 @@ class SliderController extends Controller
      */
     public function edit($id)
     {
+        $setting = Setting::get()->first();
+
         $sliders = Slider::find($id);
 
-        return view('admin.slider.edit', compact('sliders'));
+        return view('admin.slider.edit', compact('sliders', 'setting'));
     }
 
     /**

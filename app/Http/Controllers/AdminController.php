@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Message;
 use App\RecentActivity;
 use App\Setting;
+use App\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -15,11 +17,15 @@ class AdminController extends Controller
      */
     public function index()
     {
+        $unreaded_message = Message::where('is_read', '=', false)->count();
+
+        $pending_users = User::where('status', '=', false)->count();
+
         $setting = Setting::get()->first();
 
         $recent_activities = RecentActivity::all()->sortByDesc('created_at')->take(100);
 
-        return view('admin.home.index', compact('setting', 'recent_activities'));
+        return view('admin.home.index', compact('setting', 'recent_activities', 'pending_users', 'unreaded_message'));
     }
 
     /**

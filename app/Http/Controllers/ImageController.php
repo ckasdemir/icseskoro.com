@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Setting;
 use App\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,9 +16,11 @@ class ImageController extends Controller
      */
     public function index()
     {
+        $setting = Setting::get()->first();
+
         $images = Image::all()->sortByDesc('created_at');
 
-        return view('admin.image.index', compact('images'));
+        return view('admin.image.index', compact('images', 'setting'));
     }
 
     /**

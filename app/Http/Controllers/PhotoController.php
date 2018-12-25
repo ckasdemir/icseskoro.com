@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Photo;
 use App\PhotoGallery;
+use App\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,9 +17,11 @@ class PhotoController extends Controller
      */
     public function index()
     {
+        $setting = Setting::get()->first();
+
         $photos = Photo::all()->sortByDesc('created_at');
 
-        return view('admin.photo.index', compact('photos'));
+        return view('admin.photo.index', compact('photos', 'setting'));
     }
 
     /**
@@ -28,9 +31,11 @@ class PhotoController extends Controller
      */
     public function create()
     {
+        $setting = Setting::get()->first();
+
         $photo_gallery = PhotoGallery::where('status', '=', true)->get()->sortBy('title');
 
-        return view('admin.photo.create', compact('photo_gallery'));
+        return view('admin.photo.create', compact('photo_gallery', 'setting'));
     }
 
     /**
@@ -119,11 +124,13 @@ class PhotoController extends Controller
      */
     public function edit($id)
     {
+        $setting = Setting::get()->first();
+
         $photo_gallery = PhotoGallery::where('status', '=', true)->get()->sortBy('title');
 
         $photo = Photo::find($id);
 
-        return view('admin.photo.edit', compact('photo', 'photo_gallery'));
+        return view('admin.photo.edit', compact('photo', 'photo_gallery', 'setting'));
     }
 
     /**
