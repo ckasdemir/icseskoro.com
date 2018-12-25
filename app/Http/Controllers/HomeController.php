@@ -10,6 +10,7 @@ use App\Page;
 use App\Partner;
 use App\Photo;
 use App\PhotoGallery;
+use App\RecentActivity;
 use App\Setting;
 use App\Slider;
 use App\Song;
@@ -295,6 +296,12 @@ class HomeController extends Controller
         $user->save();
 
         if ($user) {
+            $recent_activity = new RecentActivity();
+            $recent_activity->user_id = Auth::user()->id;
+            $recent_activity->description = "profilini güncelledi.";
+
+            $recent_activity->save();
+
             alert()
                 ->success('İşlem tamamlandı!', 'Profil bilgileriniz başarıyla güncellenmiştir.')
                 ->showConfirmButton()
@@ -382,6 +389,11 @@ class HomeController extends Controller
             $song->save();
 
             if ($song) {
+                $recent_activity = new RecentActivity();
+                $recent_activity->user_id = Auth::user()->id;
+                $recent_activity->description = "<strong>" . $song->song_name . "</strong> adında bir şarkı yükledi.";
+
+                $recent_activity->save();
                 alert()
                     ->success('İşlem tamamlandı!', 'Şarkı ekleme işlemi başarıyla tamamlanmıştır.')
                     ->showConfirmButton()

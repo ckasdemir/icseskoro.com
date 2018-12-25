@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\RecentActivity;
 use App\User;
 use App\VoiceType;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all()->sortBy('name')->sortBy('role');
+        $users = User::all()->sortBy('name');
 
         return view('admin.user.index', compact('users'));
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Album;
+use App\RecentActivity;
 use App\Song;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -89,6 +90,11 @@ class SongController extends Controller
             $song->save();
 
             if ($song) {
+                $recent_activity = new RecentActivity();
+                $recent_activity->user_id = Auth::user()->id;
+                $recent_activity->description = "<strong>" . $song->song_name . "</strong> adında bir şarkı yükledi.";
+
+                $recent_activity->save();
                 alert()
                     ->success('İşlem tamamlandı!', 'Şarkı ekleme işlemi başarıyla tamamlanmıştır.')
                     ->showConfirmButton()
@@ -189,6 +195,11 @@ class SongController extends Controller
         $song->save();
 
         if ($song) {
+            $recent_activity = new RecentActivity();
+            $recent_activity->user_id = Auth::user()->id;
+            $recent_activity->description = "<strong>" . $song->song_name . "</strong> şarkısını güncelledi.";
+
+            $recent_activity->save();
             alert()
                 ->success('İşlem tamamlandı!', 'Şarkı ekleme işlemi başarıyla tamamlanmıştır.')
                 ->showConfirmButton()

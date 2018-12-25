@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\RecentActivity;
+use App\Setting;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -13,7 +15,11 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.home.index');
+        $setting = Setting::get()->first();
+
+        $recent_activities = RecentActivity::all()->sortByDesc('created_at')->take(100);
+
+        return view('admin.home.index', compact('setting', 'recent_activities'));
     }
 
     /**

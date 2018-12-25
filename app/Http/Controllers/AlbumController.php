@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Album;
+use App\RecentActivity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -73,6 +74,11 @@ class AlbumController extends Controller
         $album->save();
 
         if ($album) {
+            $recent_activity = new RecentActivity();
+            $recent_activity->user_id = Auth::user()->id;
+            $recent_activity->description = "<strong>" . $album->album_name . "</strong> adında bir albüm oluşturdu.";
+
+            $recent_activity->save();
             alert()
                 ->success('İşlem tamamlandı!', 'Albüm ekleme işlemi başarıyla tamamlanmıştır.')
                 ->showConfirmButton()
@@ -157,6 +163,11 @@ class AlbumController extends Controller
         $album->save();
 
         if ($album) {
+            $recent_activity = new RecentActivity();
+            $recent_activity->user_id = Auth::user()->id;
+            $recent_activity->description = "<strong>" . $album->album_name . "</strong> albümünü güncelledi.";
+
+            $recent_activity->save();
             alert()
                 ->success('İşlem tamamlandı!', 'Albüm güncelleme işlemi başarıyla tamamlanmıştır.')
                 ->showConfirmButton()
