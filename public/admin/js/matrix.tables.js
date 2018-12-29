@@ -4,6 +4,7 @@ $(document).ready(function () {
         "sPaginationType": "full_numbers",
         "sDom": '<""l>t<"F"fp>',
         "bSort": false,
+        "iDisplayLength": 100
     });
 
     $('input[type=checkbox],input[type=radio],input[type=file]').uniform();
