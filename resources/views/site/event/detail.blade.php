@@ -121,7 +121,7 @@
                                                 @if(!empty($item->image) && file_exists(public_path("/uploads/photo_gallery/".$item->photo_gallery->folder_name."/photos/".$item->image)))
                                                     <a href="#"><img
                                                             src="/uploads/photo_gallery/{{$item->photo_gallery->folder_name}}/photos/{{$item->image}}"
-                                                            alt="{{$item->title}}"/></a>
+                                                            alt="{{$item->title}}" width="250" height="188"/></a>
                                                 @else
                                                     <img
                                                         src="/site/assets/images/default/default_photo_gallery.jpg"

@@ -58,8 +58,8 @@ class AlbumController extends Controller
         $album->user_id = Auth::user()->id;
         $album->folder_name = $folderName;
 
-        mkdir('uploads/albums/' . $folderName, 644, true);
-        mkdir('uploads/albums/' . $folderName . '/songs/', 644, true);
+        mkdir('uploads/albums/' . $folderName, 755, true);
+        mkdir('uploads/albums/' . $folderName . '/songs/', 755, true);
 
         if (!empty(request('image'))) {
             if (request()->hasFile('image')) {
@@ -149,8 +149,8 @@ class AlbumController extends Controller
         $album->user_id = Auth::user()->id;
         $album->folder_name = $folderName;
 
-        mkdir('uploads/albums/' . $folderName, 644, true);
-        mkdir('uploads/albums/' . $folderName . '/songs/', 644, true);
+        mkdir('uploads/albums/' . $folderName, 755, true);
+        mkdir('uploads/albums/' . $folderName . '/songs/', 755, true);
 
         if (!empty(request('image'))) {
             if (request()->hasFile('image')) {

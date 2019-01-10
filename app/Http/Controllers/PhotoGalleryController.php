@@ -58,8 +58,8 @@ class PhotoGalleryController extends Controller
         $photo_gallery->user_id = Auth::user()->id;
         $photo_gallery->folder_name = $folderName;
 
-        mkdir('uploads/photo_gallery/' . $folderName, 644, true);
-        mkdir('uploads/photo_gallery/' . $folderName . '/photos/', 644, true);
+        mkdir('uploads/photo_gallery/' . $folderName, 755, true);
+        mkdir('uploads/photo_gallery/' . $folderName . '/photos/', 755, true);
 
         if (!empty(request('image'))) {
             if (request()->hasFile('image')) {

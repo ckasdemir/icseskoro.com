@@ -120,7 +120,7 @@
                                                 @if(!empty($item->image) && file_exists(public_path("/uploads/users/".$item->image)))
                                                     <a href="#"><img src="/uploads/users/{{$item->image}}"
                                                                      alt="{{$item->name}}"
-                                                                     style="width: 250px; height: 250px"></a>
+                                                                     width="250" height="250"/></a>
                                                 @else
                                                     <a href="#"><img src="/site/assets/images/default/default_user.jpg"
                                                                      alt="{{$item->name}}"

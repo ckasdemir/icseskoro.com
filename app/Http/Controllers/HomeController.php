@@ -75,7 +75,7 @@ class HomeController extends Controller
 
         $advertisements = Advertisement::inRandomOrder()->where('status', '=', true)->take(3)->get();
 
-        $events = Event::where('status', '=', true)->where('event_date', '>=', date('Y-m-d'))->get()->sortBy('event_date');
+        $events = Event::where('status', '=', true)->get()->sortByDesc('event_date');
 
         return view('site.event.index', compact('events', 'setting', 'nav_pages', 'advertisements'));
     }

@@ -8,6 +8,7 @@ use App\Setting;
 use App\Song;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 class SongController extends Controller
 {
@@ -237,8 +238,14 @@ class SongController extends Controller
         $song = Song::destroy($id);
 
         if ($song) {
-            unlink('uploads/albums/' . $albumFolder . '/songs/' . $find->document);
-            unlink('uploads/albums/' . $albumFolder . '/songs/' . $find->recording);
+            if (file_exists(public_path("/uploads/albums/" . $albumFolder . '/songs/' . $find->document))) {
+                unlink('uploads/albums/' . $albumFolder . '/songs/' . $find->document);
+            }
+
+            if (file_exists(public_path("/uploads/albums/" . $albumFolder . '/songs/' . $find->recording))) {
+                unlink('uploads/albums/' . $albumFolder . '/songs/' . $find->recording);
+            }
+
             alert()
                 ->success('İşlem tamamlandı!', 'Şarkı silme işlemi başarıyla tamamlanmıştır.')
                 ->showConfirmButton()

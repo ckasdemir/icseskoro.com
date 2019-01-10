@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\ContactForm;
 use App\Message;
 use App\Setting;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -31,7 +32,11 @@ class MessageController extends Controller
      */
     public function create()
     {
-        //
+        $setting = Setting::get()->first();
+
+        $users = User::where('status', '=', true)->get()->sortBy('name');
+
+        return view('admin.message.create', compact('setting', 'users'));
     }
 
     /**
@@ -42,7 +47,43 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $to = "";
+
+        $setting = Setting::get()->first();
+
+        $array = request('to');
+
+        if (in_array("all", $array)) {
+            $users = User::where('status', '=', true)->get()->sortBy('name');
+
+            foreach ($users as $item) {
+                $to .= $item->email . ";";
+            }
+
+            return $to;
+        } else {
+            foreach ($array as $item) {
+                $to .= $item . ";";
+            }
+        }
+
+        $data = array(
+            'name' => $setting->title,
+            'email' => $setting->email,
+            'phone' => $setting->mobile,
+            'address' => $setting->address,
+            'subject' => request('subject'),
+            'message' => request('content'),
+        );
+
+        Mail::to($to)->send(new ContactForm($data, request('subject')));
+
+        alert()
+            ->success('İşlem tamamlandı!', 'Mesajınız başarıyla gönderilmiştir.')
+            ->showConfirmButton()
+            ->showCloseButton();
+
+        return back();
     }
 
     /**

@@ -32,7 +32,7 @@
                                     @if(!empty($item->image) && file_exists(public_path("/uploads/photo_gallery/".$item->folder_name."/".$item->image)))
                                         <img
                                             src="/uploads/photo_gallery/{{$item->folder_name}}/{{$item->image}}"
-                                            alt="{{$item->title}}"/>
+                                            alt="{{$item->title}}" width="250" height="188"/>
                                     @else
                                         <img
                                             src="/site/assets/images/default/default_photo_gallery.jpg"

@@ -13,6 +13,11 @@
                 <div class="widget-box">
                     <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>
                         <h5>Gelen Mesajlar</h5>
+                        <div style="float: right; margin: 3px 10px 3px 3px; overflow: hidden">
+                            <a href="{{route('messages.create')}}" class="btn btn-success"><i
+                                    class="icon-plus"></i> Yeni
+                                Mesaj</a>
+                        </div>
                     </div>
                     <div class="widget-content nopadding">
                         <table class="table table-bordered data-table">
