@@ -47,25 +47,9 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        $to = "";
-
         $setting = Setting::get()->first();
 
         $array = request('to');
-
-        if (in_array("all", $array)) {
-            $users = User::where('status', '=', true)->get()->sortBy('name');
-
-            foreach ($users as $item) {
-                $to .= $item->email . ";";
-            }
-
-            return $to;
-        } else {
-            foreach ($array as $item) {
-                $to .= $item . ";";
-            }
-        }
 
         $data = array(
             'name' => $setting->title,
@@ -76,7 +60,21 @@ class MessageController extends Controller
             'message' => request('content'),
         );
 
-        Mail::to($to)->send(new ContactForm($data, request('subject')));
+        if (in_array("all", $array)) {
+            $users = User::where('status', '=', true)->get()->sortBy('name');
+
+            foreach ($users as $item) {
+                if (!empty($item->email)) {
+                    Mail::to($item->email)->send(new ContactForm($data, request('subject')));
+                }
+            }
+        } else {
+            foreach ($array as $item) {
+                if (!empty($item)) {
+                    Mail::to($item)->send(new ContactForm($data, request('subject')));
+                }
+            }
+        }
 
         alert()
             ->success('İşlem tamamlandı!', 'Mesajınız başarıyla gönderilmiştir.')
