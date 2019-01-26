@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BannedIpAddress;
 use App\Mail\ContactForm;
 use App\Message;
 use App\Setting;
@@ -134,6 +135,34 @@ class MessageController extends Controller
      */
     public function destroy($id)
     {
+        $message = Message::destroy($id);
+
+        if ($message) {
+            alert()
+                ->success('İşlem tamamlandı!', 'Mesaj silme işlemi başarıyla tamamlanmıştır.')
+                ->showConfirmButton()
+                ->showCloseButton();
+
+            return redirect()->route('messages.index');
+        } else {
+            alert()
+                ->error('Hata!', 'Mesaj silme işlemi başarısız.')
+                ->showConfirmButton()
+                ->showCloseButton();
+
+            return back();
+        }
+    }
+
+    public function banned($id)
+    {
+        $find = Message::find($id);
+        $ip_address = $find->ip_address;
+
+        $banned = new BannedIpAddress();
+        $banned->ip_address = $ip_address;
+        $banned->save();
+
         $message = Message::destroy($id);
 
         if ($message) {

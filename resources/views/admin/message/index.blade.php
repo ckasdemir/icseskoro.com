@@ -27,9 +27,10 @@
                                 <th>Kimden</th>
                                 <th>E-Posta</th>
                                 <th>Telefon</th>
+                                <th>IP</th>
                                 <th width="12%">Tarih</th>
                                 <th width="3%">Okundu</th>
-                                <th width="12%">İşlemler</th>
+                                <th width="15%">İşlemler</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -39,6 +40,7 @@
                                     <td>{{$item->name}}</td>
                                     <td>{{$item->email}}</td>
                                     <td>{{$item->phone}}</td>
+                                    <td>{{$item->ip_address}}</td>
                                     <td style="text-align: center">{!! date('d.m.Y H:i:s', strtotime($item->created_at)) !!}</td>
                                     <td style="text-align: center">
                                         @if($item->is_read == 1)
@@ -55,10 +57,13 @@
                                         <a href="{{route('messages.show', $item->id)}}" class="btn btn-info btn-mini"
                                            style="float: left; margin-right: 5px"><i
                                                 class="icon icon-edit"></i> Oku</a>
-                                        {!! Form::model($item,['route'=>['messages.destroy',$item->id],'method'=>'DELETE', 'style'=>'float:left']) !!}
+                                        {!! Form::model($item,['route'=>['messages.destroy',$item->id],'method'=>'DELETE', 'style'=>'float:left; margin-right: 5px;']) !!}
                                         <button class="btn btn-danger btn-mini"><i class="icon icon-trash"></i> Sil
                                         </button>
                                         {!! Form::close() !!}
+                                        <a href="{{route('messages.banned', $item->id)}}" class="btn btn-warning btn-mini btn-mini"
+                                           style="float: left; margin-right: 5px"><i
+                                                class="icon icon-ban-circle"></i> Engelle</a>
                                         <div style="clear: both"></div>
                                     </td>
                                 </tr>

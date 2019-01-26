@@ -20,6 +20,7 @@ class CreateMessagesTable extends Migration
             $table->string('phone', 11)->nullable();
             $table->string('subject')->nullable();
             $table->text('message');
+            $table->string('ip_address');
             $table->boolean('is_read')->nullable()->default(false);
             $table->timestamps();
         });

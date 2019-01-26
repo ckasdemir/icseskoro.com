@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BannedIpAddress;
 use App\Mail\ContactForm;
 use App\Message;
 use App\Page;
@@ -99,30 +100,54 @@ class ContactController extends Controller
             'message' => 'required',
         ));
 
-        $message = new Message();
-        $message->name = request('contact_name');
-        $message->email = request('contact_email');
-        $message->phone = request('contact_phone');
-        $message->subject = request('contact_subject');
-        $message->message = request('message');
-        $message->is_read = false;
+        $ipaddress = '';
 
-        $message->save();
+        if (isset($_SERVER['HTTP_CLIENT_IP']))
+            $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+        else if(isset($_SERVER['HTTP_X_FORWARDED_FOR']))
+            $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        else if(isset($_SERVER['HTTP_X_FORWARDED']))
+            $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+        else if(isset($_SERVER['HTTP_X_CLUSTER_CLIENT_IP']))
+            $ipaddress = $_SERVER['HTTP_X_CLUSTER_CLIENT_IP'];
+        else if(isset($_SERVER['HTTP_FORWARDED_FOR']))
+            $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+        else if(isset($_SERVER['HTTP_FORWARDED']))
+            $ipaddress = $_SERVER['HTTP_FORWARDED'];
+        else if(isset($_SERVER['REMOTE_ADDR']))
+            $ipaddress = $_SERVER['REMOTE_ADDR'];
+        else
+            $ipaddress = 'UNKNOWN';
 
-        if ($message) {
-            alert()
-                ->success('İşlem tamamlandı!', 'Mesajınız başarıyla gönderilmiştir.')
-                ->showConfirmButton()
-                ->showCloseButton();
+        $banned_ip_address = BannedIpAddress::where('ip_address','=', $ipaddress)->count();
 
-            return redirect()->route('contact.index');
-        } else {
-            alert()
-                ->error('Hata!', 'Mesaj gönderme işlemi başarısız.')
-                ->showConfirmButton()
-                ->showCloseButton();
+        if($banned_ip_address == 0) {
+            $message = new Message();
+            $message->name = request('contact_name');
+            $message->email = request('contact_email');
+            $message->phone = request('contact_phone');
+            $message->subject = request('contact_subject');
+            $message->message = request('message');
+            $message->ip_address = $ipaddress;
+            $message->is_read = false;
 
-            return back();
+            $message->save();
+
+            if ($message) {
+                alert()
+                    ->success('İşlem tamamlandı!', 'Mesajınız başarıyla gönderilmiştir.')
+                    ->showConfirmButton()
+                    ->showCloseButton();
+
+                return redirect()->route('contact.index');
+            } else {
+                alert()
+                    ->error('Hata!', 'Mesaj gönderme işlemi başarısız.')
+                    ->showConfirmButton()
+                    ->showCloseButton();
+
+                return back();
+            }
         }
 
         return redirect()->route('contact.index');

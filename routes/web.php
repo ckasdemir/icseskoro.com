@@ -72,6 +72,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'admin'], function () {
     Route::get('/messages/readed/{id}', 'MessageController@readed')->name('messages.readed');
     Route::get('/messages/unreaded/{id}', 'MessageController@unreaded')->name('messages.unreaded');
     Route::post('/messages/replay/{id}', 'MessageController@replay')->name('messages.replay');
+    Route::get('/messages/banned/{id}', 'MessageController@banned')->name('messages.banned');
 });
 
 Auth::routes(['verify' => true]);

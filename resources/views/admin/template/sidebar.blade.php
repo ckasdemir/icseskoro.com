@@ -1,5 +1,5 @@
 <!--sidebar-menu-->
-<div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Anasayfa</a>
+<div id="sidebar"><a href="{{route('admin.index')}}" class="visible-phone"><i class="icon icon-home"></i> Anasayfa</a>
     <ul>
         <li class="active"><a href="{{route('admin.index')}}"><i class="icon icon-home"></i> <span>Anasayfa</span></a>
         </li>

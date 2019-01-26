@@ -31,7 +31,7 @@
                                 <figure>
                                     @if(!empty($item->image) && file_exists(public_path("/uploads/albums/".$item->folder_name."/".$item->image)))
                                         <img src="/uploads/albums/{{$item->folder_name}}/{{$item->image}}"
-                                             alt="{{$item->album_name}}">
+                                             alt="{{$item->album_name}}" width="340px" height="340px">
                                     @else
                                         <img
                                             src="/site/assets/images/default/default_album.jpg"

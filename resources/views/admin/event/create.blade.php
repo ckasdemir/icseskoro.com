@@ -2,7 +2,7 @@
 
 @section('content')
     <div id="content-header">
-        <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Anasayfa</a> <a
+        <div id="breadcrumb"><a href="{{route('admin.index')}}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Anasayfa</a> <a
                 href="#" class="current">Etkinlik Ekle</a></div>
         <h1>Etkinlik Ekle</h1>
     </div>

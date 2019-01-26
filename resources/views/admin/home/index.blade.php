@@ -3,7 +3,7 @@
 @section('content')
     <!--breadcrumbs-->
     <div id="content-header">
-        <div id="breadcrumb"><a href="index.html" title="Anasayfa" class="tip-bottom"><i class="icon-home"></i>
+        <div id="breadcrumb"><a href="{{route('admin.index')}}" title="Anasayfa" class="tip-bottom"><i class="icon-home"></i>
                 Anasayfa</a></div>
     </div>
     <!--End-breadcrumbs-->
